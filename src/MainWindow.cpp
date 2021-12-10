@@ -1,29 +1,18 @@
-#include <qt5/QtWidgets/QPushButton>
-#include <qt5/QtWidgets/QLCDNumber>
-#include <qt5/QtWidgets/QSlider>
+#include <qt5/QtCore/QCoreApplication>
 #include <qt5/QtWidgets/QVBoxLayout>
 #include <qt5/QtWidgets/QGridLayout>
 
+#include "widgets/RsaForm.hpp"
 #include "MainWindow.hpp"
 
 MainWindow::MainWindow (QWidget *parent) {
     QGridLayout *layout = new QGridLayout;
-    QPushButton *quitButton = new QPushButton ("Quit");
-    QLCDNumber *lcd = new QLCDNumber(2);
-    QSlider *slider = new QSlider(Qt::Horizontal);
-
-    quitButton->setFixedSize(75, 30);
-    lcd->setSegmentStyle(QLCDNumber::Filled);
-    lcd->setFixedSize(100, 100);
-    slider->setRange(0, 99);
-    slider->setValue(50);
-
-    connect(slider, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)));
-
-    layout->addWidget(lcd);
-    layout->addWidget(slider);
-    layout->addWidget(quitButton);
+    RsaForm *rsaForm = new RsaForm;
+    
+    layout->setAlignment(Qt::AlignTop);
+    layout->addWidget(rsaForm, 0, 0, 0, 0);
 
     this->setLayout(layout);
+    this->setWindowTitle(QCoreApplication::applicationName());
     this->resize(2000, 2000);
 }
