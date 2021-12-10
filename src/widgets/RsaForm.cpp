@@ -12,12 +12,12 @@ RsaForm::RsaForm (QWidget *parent) {
     QGridLayout *grid = new QGridLayout;
     NumberInput *qInputField = new NumberInput("Entrer le nombre Q :", "Ce nombre doit etre premier.");    
     NumberInput *pInputField = new NumberInput("Entrer le nombre P :", "Ce nombre doit etre premier.");    
-    NumberInput *eInputField = new NumberInput("Entrer le cle de chiffrement :", "Le cle de chiffrement doit etre correspondant a P et Q.");    
+    NumberInput *eInputField = new NumberInput("Entrer le cle privee de chiffrement :", "Le cle de chiffrement doit etre correspondant a P et Q.");
     QLabel *formHeader = new QLabel;
 
     grid->addWidget(pInputField, 0, 0);
     grid->addWidget(qInputField, 0, 1);
-    grid->addWidget(eInputField, 1, 0);
+    grid->addWidget(eInputField, 1, 0, 1, 1);
 
     formHeader->setText("Calculer les paramatres de RSA");
     formHeader->setFont(QFont("Sans Serif", 20));

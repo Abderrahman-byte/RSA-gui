@@ -2,6 +2,7 @@
 #include <qt5/QtWidgets/QLabel>
 #include <qt5/QtWidgets/QLineEdit>
 #include <qt5/QtGui/QFont>
+#include <qt5/QtGui/QIntValidator>
 
 #include "widgets/NumberInput.hpp"
 
@@ -12,12 +13,13 @@ NumberInput::NumberInput (std::string labelText, std::string descriptionText, QW
     QLabel *label = new QLabel;
     QLabel *description = new QLabel;
     QLineEdit *inputField = new QLineEdit;
+    QIntValidator *validator = new QIntValidator(0, 1000);
 
     label->setFixedSize(200, 40);
-    // label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     label->setText(QString(labelText.c_str()));
     label->setAlignment(Qt::AlignLeft);
     inputField->setMaximumSize(300, 30);
+    inputField->setValidator(validator);
 
     layout->addWidget(label);
     layout->addWidget(inputField);
