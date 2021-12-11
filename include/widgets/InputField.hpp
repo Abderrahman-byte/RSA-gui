@@ -14,6 +14,8 @@ class InputField : public QWidget {
         InputField (QWidget * = 0) ;
         InputField (std::string , std::string = "", QWidget * = 0);
         void setValidator (QValidator *);
+        QString getValue ();
+        void setValue (QString);
 };
 
 #endif

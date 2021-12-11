@@ -30,10 +30,17 @@ InputField::InputField (std::string labelText, std::string descriptionText, QWid
         layout->addWidget(description);
     }
 
-
     this->setLayout(layout);
 }
 
 void InputField::setValidator (QValidator *validator) {
     this->inputField->setValidator(validator);
+}
+
+QString InputField::getValue () {
+    return this->inputField->text();
+}
+
+void InputField::setValue (QString value) {
+    this->inputField->setText(value);
 }
