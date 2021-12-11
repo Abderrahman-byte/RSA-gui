@@ -10,4 +10,6 @@ extern long expMod (long, long, long);
 extern long generateRSAPrivateKey (long, long);
 extern long generateRSAPublicKey (long, long, long);
 extern long pgcd (long, long);
+extern bool checkPublicKey (long, long, long, long);
+
 #endif

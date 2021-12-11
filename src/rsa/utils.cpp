@@ -81,3 +81,9 @@ long pgcd (long a, long b) {
 
     return result;
 }
+
+bool checkPublicKey (long p, long q, long e, long d) {
+    long m = (p - 1) * (q - 1);
+
+    return (e * d) % m == 1;
+}
