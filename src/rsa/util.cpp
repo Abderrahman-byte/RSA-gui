@@ -1,7 +1,7 @@
 #include <random>
 #include <iostream>
 
-#include "rsa/utils.hpp"
+#include "rsa/util.hpp"
 
 static bool seeded = false;
 
