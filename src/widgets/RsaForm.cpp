@@ -7,6 +7,7 @@
 
 #include "widgets/RsaForm.hpp"
 #include "widgets/InputField.hpp"
+#include "widgets/TextField.hpp"
 
 RsaForm::RsaForm (QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
@@ -14,6 +15,8 @@ RsaForm::RsaForm (QWidget *parent) {
     InputField *qInputField = new InputField("Entrer le nombre Q :", "Ce nombre doit etre premier.");    
     InputField *pInputField = new InputField("Entrer le nombre P :", "Ce nombre doit etre premier.");    
     InputField *eInputField = new InputField("Entrer le cle privee de chiffrement :", "Le cle de chiffrement doit etre correspondant a P et Q.");
+    TextField *messageField = new TextField("Entrer le message a chiffrer :");
+    TextField *cipherField = new TextField("Entrer le message a dechiffrer :");
     QLabel *formHeader = new QLabel;
     QIntValidator *intValidator = new QIntValidator;
     
@@ -24,6 +27,8 @@ RsaForm::RsaForm (QWidget *parent) {
     grid->addWidget(pInputField, 0, 0);
     grid->addWidget(qInputField, 0, 1);
     grid->addWidget(eInputField, 1, 0, 1, 1);
+    grid->addWidget(messageField, 2, 0);
+    grid->addWidget(cipherField, 2, 1);
 
     formHeader->setText("Calculer les paramatres de RSA");
     formHeader->setFont(QFont("Sans Serif", 20));
