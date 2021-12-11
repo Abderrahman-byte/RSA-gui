@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <qt5/QtWidgets/QLineEdit>
 #include <qt5/QtWidgets/QVBoxLayout>
 #include <qt5/QtWidgets/QHBoxLayout>
@@ -12,7 +13,8 @@
 #include "widgets/InputField.hpp"
 #include "widgets/TextField.hpp"
 #include "widgets/Button.hpp"
-#include "rsa/utils.hpp"
+#include "rsa/util.hpp"
+#include "utils.hpp"
 
 RsaForm::RsaForm (QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
@@ -63,6 +65,7 @@ RsaForm::RsaForm (QWidget *parent) {
     // Connect Signals with slots
     connect (generateBtn, SIGNAL(clicked()), this, SLOT(generateKeys()));
     connect (cipherBtn, SIGNAL(clicked()), this, SLOT(encrypt()));
+    connect (decipherBtn, SIGNAL(clicked()), this, SLOT(decrypt()));
 
     this->setLayout(layout);
 }
@@ -147,4 +150,42 @@ void RsaForm::encrypt () {
     }
 
     this->cipherField->setValue(encryptedFormated);
+}
+
+void RsaForm::decrypt () {
+    int p = this->pInputField->getValue().toInt();
+    int q = this->qInputField->getValue().toInt();
+    int e = this->eInputField->getValue().toInt();
+    int d = this->dInputField->getValue().toInt();
+    std::string encrypted = this->cipherField->getValue();
+    std::string decrypted = "";
+    std::vector<std::string> encryptedParts;
+
+    if (p == 0 || !isPrime(p)) {
+        std::cout << "The number p is invalid" << std::endl;
+        return ;
+    } else if (q == 0 || !isPrime(q)) {
+        std::cout << "The number p is invalid" << std::endl;
+        return ;
+    } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
+        std::cout << "The Decryption key is invalid" << std::endl;
+        return ;
+    }
+
+    if (encrypted.length() <= 0) {
+        std::cout << "Please enter the cipher text" << std::endl;
+        return ;
+    }
+
+    encryptedParts = split(encrypted, " ");
+
+    for (int i = 0; i < encryptedParts.size(); i++) {
+        std::string encByte = encryptedParts.at(i);
+        int enc = std::stoi(encByte);
+        int dec = expMod(enc, d, q * p);
+
+        decrypted += char(dec);
+    }
+
+    this->messageField->setValue(decrypted);
 }

@@ -25,7 +25,7 @@ class RsaForm : public QWidget {
     public slots :
         void generateKeys ();
         void encrypt ();
-        // void decrypt ();
+        void decrypt ();
 };
 
 #endif
