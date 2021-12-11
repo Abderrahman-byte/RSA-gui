@@ -8,18 +8,26 @@ TextField::TextField (QWidget * parent) : TextField("", "", parent) {}
 
 TextField::TextField (std::string labelText, std::string descriptionText, QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
-    QTextEdit *editor = new QTextEdit;
     QLabel *label = new QLabel;
+    this->editor = new QTextEdit;
 
     label->setFixedHeight(40);
     label->setText(QString(labelText.c_str()));
     label->setAlignment(Qt::AlignLeft);
 
-    editor->setMaximumHeight(150);
+    this->editor->setMaximumHeight(150);
     
     layout->setAlignment(Qt::AlignTop);
     layout->addWidget(label);
-    layout->addWidget(editor);
+    layout->addWidget(this->editor);
 
     this->setLayout(layout);
+}
+
+std::string TextField::getValue () {
+    return this->editor->toPlainText().toStdString();
+}
+
+void TextField::setValue (std::string value) {
+    this->editor->setText(QString(value.c_str()));
 }
