@@ -18,8 +18,6 @@ RsaForm::RsaForm (QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
     QGridLayout *grid = new QGridLayout;
     QHBoxLayout *btnsLayout = new QHBoxLayout;
-    TextField *messageField = new TextField("Saisissez le message à chiffrer :");
-    TextField *cipherField = new TextField("Saisissez le message à déchiffrer :");
     Button *generateBtn = new Button("Générer des clés");
     Button *cipherBtn = new Button("Chiffrer");
     Button *decipherBtn = new Button("Déchiffrer");
@@ -30,6 +28,8 @@ RsaForm::RsaForm (QWidget *parent) {
     this->pInputField = new InputField("Le nombre P :", "Ce nombre doit etre premier.");    
     this->eInputField = new InputField("Clé privées de chiffrement :", "Cette clé de cryptage doit correspondre à P et Q.");
     this->dInputField = new InputField("Clé publique de chiffrement:", "Cette clé de cryptage doit correspondre à P, Q et à la clé privée.");
+    this->messageField = new TextField("Saisissez le message à chiffrer :");
+    this->cipherField = new TextField("Saisissez le message à déchiffrer :");
     
     this->qInputField->setValidator(intValidator);
     this->pInputField->setValidator(intValidator);
@@ -62,6 +62,7 @@ RsaForm::RsaForm (QWidget *parent) {
 
     // Connect Signals with slots
     connect (generateBtn, SIGNAL(clicked()), this, SLOT(generateKeys()));
+    connect (cipherBtn, SIGNAL(clicked()), this, SLOT(encrypt()));
 
     this->setLayout(layout);
 }
@@ -107,4 +108,43 @@ void RsaForm::generateKeys () {
         std::cout << "Invalid public key" << std::endl;
         return ;
     }
+}
+
+void RsaForm::encrypt () {
+    int p = this->pInputField->getValue().toInt();
+    int q = this->qInputField->getValue().toInt();
+    int e = this->eInputField->getValue().toInt();
+    int d = this->dInputField->getValue().toInt();
+    std::string plain = this->messageField->getValue();
+    std::string encryptedFormated = "";
+
+    if (p == 0 || !isPrime(p)) {
+        std::cout << "The number p is invalid" << std::endl;
+        return ;
+    } else if (q == 0 || !isPrime(q)) {
+        std::cout << "The number p is invalid" << std::endl;
+        return ;
+    } else if (e == 0 || pgcd(e, (p - 1) * (q - 1)) != 1 ) {
+        std::cout << "The private key is invalid" << std::endl;
+        return ;
+    } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
+        generateKeys();
+        return ;
+    }
+
+    if (plain.length() <= 0) {
+        std::cout << "Please enter the text" << std::endl;
+        return ;
+    }
+
+
+    for (int i = 0; i < plain.length(); i++) {
+        unsigned a = (unsigned)plain.at(i);
+        long encryptedByte = expMod(a, e, q * p);
+        encryptedFormated += std::to_string(encryptedByte);
+
+        if (i < plain.length() - 1) encryptedFormated += " ";
+    }
+
+    this->cipherField->setValue(encryptedFormated);
 }
