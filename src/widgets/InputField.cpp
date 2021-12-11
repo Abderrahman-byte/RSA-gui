@@ -4,25 +4,23 @@
 #include <qt5/QtGui/QFont>
 #include <qt5/QtGui/QIntValidator>
 
-#include "widgets/NumberInput.hpp"
+#include "widgets/InputField.hpp"
 
-NumberInput::NumberInput (QWidget *parent) : NumberInput("Label goes here", "nullptr", parent) {};
+InputField::InputField (QWidget *parent) : InputField("Label goes here", "nullptr", parent) {};
 
-NumberInput::NumberInput (std::string labelText, std::string descriptionText, QWidget *parent) {
+InputField::InputField (std::string labelText, std::string descriptionText, QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
     QLabel *label = new QLabel;
     QLabel *description = new QLabel;
-    QLineEdit *inputField = new QLineEdit;
-    QIntValidator *validator = new QIntValidator(0, 1000);
+    this->inputField = new QLineEdit;
 
-    label->setFixedSize(200, 40);
+    label->setFixedHeight(40);
     label->setText(QString(labelText.c_str()));
     label->setAlignment(Qt::AlignLeft);
-    inputField->setMaximumSize(300, 30);
-    inputField->setValidator(validator);
+    this->inputField->setMaximumSize(400, 30);
 
     layout->addWidget(label);
-    layout->addWidget(inputField);
+    layout->addWidget(this->inputField);
 
     if (descriptionText.length() > 0) {
         description->setAlignment(Qt::AlignLeft);
@@ -34,4 +32,8 @@ NumberInput::NumberInput (std::string labelText, std::string descriptionText, QW
 
 
     this->setLayout(layout);
+}
+
+void InputField::setValidator (QValidator *validator) {
+    this->inputField->setValidator(validator);
 }

@@ -3,17 +3,23 @@
 #include <qt5/QtWidgets/QGridLayout>
 #include <qt5/QtWidgets/QLabel>
 #include <qt5/QtGui/QFont>
+#include <qt5/QtGui/QValidator>
 
 #include "widgets/RsaForm.hpp"
-#include "widgets/NumberInput.hpp"
+#include "widgets/InputField.hpp"
 
 RsaForm::RsaForm (QWidget *parent) {
     QVBoxLayout *layout = new QVBoxLayout;
     QGridLayout *grid = new QGridLayout;
-    NumberInput *qInputField = new NumberInput("Entrer le nombre Q :", "Ce nombre doit etre premier.");    
-    NumberInput *pInputField = new NumberInput("Entrer le nombre P :", "Ce nombre doit etre premier.");    
-    NumberInput *eInputField = new NumberInput("Entrer le cle privee de chiffrement :", "Le cle de chiffrement doit etre correspondant a P et Q.");
+    InputField *qInputField = new InputField("Entrer le nombre Q :", "Ce nombre doit etre premier.");    
+    InputField *pInputField = new InputField("Entrer le nombre P :", "Ce nombre doit etre premier.");    
+    InputField *eInputField = new InputField("Entrer le cle privee de chiffrement :", "Le cle de chiffrement doit etre correspondant a P et Q.");
     QLabel *formHeader = new QLabel;
+    QIntValidator *intValidator = new QIntValidator;
+    
+    qInputField->setValidator(intValidator);
+    pInputField->setValidator(intValidator);
+    eInputField->setValidator(intValidator);
 
     grid->addWidget(pInputField, 0, 0);
     grid->addWidget(qInputField, 0, 1);

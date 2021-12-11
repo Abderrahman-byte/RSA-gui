@@ -7,12 +7,14 @@ TEMPLATE = app
 INCLUDEPATH += ./include
 
 HEADERS += ./include/MainWindow.hpp\
-        ./include/widgets/RsaForm.hpp
-        ./include/widgets/NumberInput.hpp
+        ./include/widgets/RsaForm.hpp\
+        ./include/widgets/InputField.hpp\
+        ./include/widgets/TextField.hpp
 
 SOURCES += ./src/main.cpp\
     ./src/MainWindow.cpp\
-    ./src/widgets/NumberInput.cpp\
+    ./src/widgets/TextField.cpp\
+    ./src/widgets/InputField.cpp\
     ./src/widgets/RsaForm.cpp
 
 TARGET = rsa_gui
