@@ -16,12 +16,16 @@ class RsaForm : public QWidget {
         InputField *pInputField;
         InputField *eInputField;
         InputField *dInputField;
+        TextField *messageField;
+        TextField *cipherField;
 
     public :
         RsaForm (QWidget *parent = 0);
 
     public slots :
         void generateKeys ();
+        void encrypt ();
+        // void decrypt ();
 };
 
 #endif
