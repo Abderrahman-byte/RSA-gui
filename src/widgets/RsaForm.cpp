@@ -90,10 +90,10 @@ void RsaForm::generateKeys () {
         this->pInputField->setValue(QString::number(p));
         this->qInputField->setValue(QString::number(q));
     } else if (!isPrime(q)) {
-        std::cout << "Q must a prime number" << std::endl;
+        emit warning("Q must a prime number");
         return ;
     } else if (!isPrime(p)) {
-        std::cout << "P must a prime number" << std::endl;
+        emit warning("P must a prime number");
         return ;
     }
 
@@ -103,7 +103,7 @@ void RsaForm::generateKeys () {
         e = generateRSAPrivateKey(q, p);
         this->eInputField->setValue(QString::number(e));
     } else if (pgcd(e, (p - 1) * (q - 1)) != 1) {
-        std::cout << "Private Key must be prime with (p - 1) * (q - 1)" << std::endl;
+        emit warning("Encryption Key must be prime with (p - 1) * (q - 1)");
         return ;
     }
 
@@ -112,7 +112,7 @@ void RsaForm::generateKeys () {
         d = generateRSAPublicKey(q, p, e);
         this->dInputField->setValue(QString::number(d));
     } else if (!checkPublicKey(q, p, e, d)) {
-        std::cout << "Invalid public key" << std::endl;
+        emit warning("Invalid decryption key");
         return ;
     }
 }
@@ -126,13 +126,13 @@ void RsaForm::encrypt () {
     std::string encryptedFormated = "";
 
     if (p == 0 || !isPrime(p)) {
-        std::cout << "The number p is invalid" << std::endl;
+        emit warning("The number p is invalid");
         return ;
     } else if (q == 0 || !isPrime(q)) {
-        std::cout << "The number p is invalid" << std::endl;
+        emit warning("The number p is invalid");
         return ;
     } else if (e == 0 || pgcd(e, (p - 1) * (q - 1)) != 1 ) {
-        std::cout << "The private key is invalid" << std::endl;
+        emit warning("The encryption key is invalid");
         return ;
     } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
         generateKeys();
@@ -140,7 +140,7 @@ void RsaForm::encrypt () {
     }
 
     if (plain.length() <= 0) {
-        std::cout << "Please enter the text" << std::endl;
+        emit warning("Please enter the text");
         return ;
     }
 
@@ -166,18 +166,18 @@ void RsaForm::decrypt () {
     std::vector<std::string> encryptedParts;
 
     if (p == 0 || !isPrime(p)) {
-        std::cout << "The number p is invalid" << std::endl;
+        emit warning("The number p is invalid");
         return ;
     } else if (q == 0 || !isPrime(q)) {
-        std::cout << "The number p is invalid" << std::endl;
+        emit warning("The number p is invalid");
         return ;
     } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
-        std::cout << "The Decryption key is invalid" << std::endl;
+        emit warning("The Decryption key is invalid");
         return ;
     }
 
     if (encrypted.length() <= 0) {
-        std::cout << "Please enter the cipher text" << std::endl;
+        emit warning("Please enter the cipher text");
         return ;
     }
 

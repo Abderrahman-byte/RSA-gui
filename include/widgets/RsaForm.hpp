@@ -24,6 +24,7 @@ class RsaForm : public QWidget {
 
     signals :
         void fieldChanged ();
+        void warning (QString);
 
     public slots :
         void generateKeys ();
