@@ -7,6 +7,8 @@
 #define _TEXTFIELD_H_ 1
 
 class TextField : public QWidget {
+    Q_OBJECT
+
     private :
         QTextEdit *editor;
 
@@ -15,6 +17,12 @@ class TextField : public QWidget {
         TextField (std::string, std::string = "", QWidget * = 0);
         std::string getValue ();
         void setValue (std::string);
+
+    signals :
+        void valueChanged ();
+
+    public slots :
+        void emitValueChanged ();
 };
 
 #endif

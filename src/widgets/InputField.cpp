@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <qt5/QtWidgets/QVBoxLayout>
 #include <qt5/QtWidgets/QLabel>
 #include <qt5/QtWidgets/QLineEdit>
@@ -30,6 +32,8 @@ InputField::InputField (std::string labelText, std::string descriptionText, QWid
         layout->addWidget(description);
     }
 
+    connect (this->inputField, SIGNAL(textChanged(const QString &)), this, SLOT(emitValueChanged()));
+
     this->setLayout(layout);
 }
 
@@ -43,4 +47,8 @@ QString InputField::getValue () {
 
 void InputField::setValue (QString value) {
     this->inputField->setText(value);
+}
+
+void InputField::emitValueChanged () {
+    emit valueChanged();
 }

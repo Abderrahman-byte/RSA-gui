@@ -22,10 +22,14 @@ class RsaForm : public QWidget {
     public :
         RsaForm (QWidget *parent = 0);
 
+    signals :
+        void fieldChanged ();
+
     public slots :
         void generateKeys ();
         void encrypt ();
         void decrypt ();
+        void emitFieldChanged ();
 };
 
 #endif

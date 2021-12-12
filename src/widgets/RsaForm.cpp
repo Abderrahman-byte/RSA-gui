@@ -55,8 +55,6 @@ RsaForm::RsaForm (QWidget *parent) {
     btnsLayout->addWidget(cipherBtn);
     btnsLayout->addWidget(decipherBtn);
 
-    // btnsLayout->setContentsMargins(0, 0, 0, 0);
-
     layout->addWidget(formHeader);
     layout->addLayout(grid);
     layout->addLayout(btnsLayout);
@@ -66,6 +64,12 @@ RsaForm::RsaForm (QWidget *parent) {
     connect (generateBtn, SIGNAL(clicked()), this, SLOT(generateKeys()));
     connect (cipherBtn, SIGNAL(clicked()), this, SLOT(encrypt()));
     connect (decipherBtn, SIGNAL(clicked()), this, SLOT(decrypt()));
+    connect (this->qInputField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
+    connect (this->pInputField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
+    connect (this->eInputField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
+    connect (this->dInputField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
+    connect (this->messageField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
+    connect (this->cipherField, SIGNAL(valueChanged()), this, SLOT(emitFieldChanged()));
 
     this->setLayout(layout);
 }
@@ -188,4 +192,8 @@ void RsaForm::decrypt () {
     }
 
     this->messageField->setValue(decrypted);
+}
+
+void RsaForm::emitFieldChanged () {
+    emit fieldChanged();
 }

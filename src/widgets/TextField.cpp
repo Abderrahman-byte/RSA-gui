@@ -21,6 +21,9 @@ TextField::TextField (std::string labelText, std::string descriptionText, QWidge
     layout->addWidget(label);
     layout->addWidget(this->editor);
 
+    // Connect signals and slots
+    connect (this->editor, SIGNAL(textChanged()), this, SLOT(emitValueChanged()));
+
     this->setLayout(layout);
 }
 
@@ -30,4 +33,8 @@ std::string TextField::getValue () {
 
 void TextField::setValue (std::string value) {
     this->editor->setText(QString(value.c_str()));
+}
+
+void TextField::emitValueChanged () {
+    emit valueChanged();
 }
