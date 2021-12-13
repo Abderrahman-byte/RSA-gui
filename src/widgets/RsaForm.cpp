@@ -29,8 +29,8 @@ RsaForm::RsaForm (QWidget *parent) {
     
     this->qInputField = new InputField("Le nombre Q :", "Ce nombre doit etre premier.");    
     this->pInputField = new InputField("Le nombre P :", "Ce nombre doit etre premier.");    
-    this->eInputField = new InputField("Clé privées de chiffrement :", "Cette clé de cryptage doit correspondre à P et Q.");
-    this->dInputField = new InputField("Clé publique de chiffrement:", "Cette clé de cryptage doit correspondre à P, Q et à la clé privée.");
+    this->eInputField = new InputField("La clé de chiffrement :", "Cette clé de cryptage doit correspondre à P et Q.");
+    this->dInputField = new InputField("La clé de déchiffrement:", "Cette clé de cryptage doit correspondre à P, Q et à La clé de chiffrement.");
     this->messageField = new TextField("Saisissez le message à chiffrer :");
     this->cipherField = new TextField("Saisissez le message à déchiffrer :");
     
@@ -91,10 +91,10 @@ void RsaForm::generateKeys () {
         this->pInputField->setValue(QString::number(p));
         this->qInputField->setValue(QString::number(q));
     } else if (!isPrime(q)) {
-        emit warning("Q must a prime number");
+        emit warning("Q doit être un nombre premier");
         return ;
     } else if (!isPrime(p)) {
-        emit warning("P must a prime number");
+        emit warning("P doit être un nombre premier");
         return ;
     }
 
@@ -104,7 +104,7 @@ void RsaForm::generateKeys () {
         e = generateRSAPrivateKey(q, p);
         this->eInputField->setValue(QString::number(e));
     } else if (pgcd(e, (p - 1) * (q - 1)) != 1) {
-        emit warning("Encryption Key must be prime with (p - 1) * (q - 1)");
+        emit warning("La clé de chiffrement doit être premier avec (p - 1) * (q - 1)");
         return ;
     }
 
@@ -113,7 +113,7 @@ void RsaForm::generateKeys () {
         d = generateRSAPublicKey(q, p, e);
         this->dInputField->setValue(QString::number(d));
     } else if (!checkPublicKey(q, p, e, d)) {
-        emit warning("Invalid decryption key");
+        emit warning("Clé de déchiffrement est invalide");
         return ;
     }
 }
@@ -127,13 +127,13 @@ void RsaForm::encrypt () {
     std::string encryptedFormated = "";
 
     if (p == 0 || !isPrime(p)) {
-        emit warning("The number p is invalid");
+        emit warning("Le nombre p est invalide");
         return ;
     } else if (q == 0 || !isPrime(q)) {
-        emit warning("The number p is invalid");
+        emit warning("Le nombre q est invalide");
         return ;
     } else if (e == 0 || pgcd(e, (p - 1) * (q - 1)) != 1 ) {
-        emit warning("The encryption key is invalid");
+        emit warning("La clé de cryptage n'est pas valide");
         return ;
     } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
         generateKeys();
@@ -141,7 +141,7 @@ void RsaForm::encrypt () {
     }
 
     if (plain.length() <= 0) {
-        emit warning("Please enter the text");
+        emit warning("Veuillez saisir le texte à chiffrer");
         return ;
     }
 
@@ -167,18 +167,18 @@ void RsaForm::decrypt () {
     std::vector<std::string> encryptedParts;
 
     if (p == 0 || !isPrime(p)) {
-        emit warning("The number p is invalid");
+        emit warning("Le nombre p est invalide");
         return ;
     } else if (q == 0 || !isPrime(q)) {
-        emit warning("The number p is invalid");
+        emit warning("Le nombre q est invalide");
         return ;
     } else if (d == 0 || !checkPublicKey(p, q, e, d)) {
-        emit warning("The Decryption key is invalid");
+        emit warning("La clé de déchiffrement n'est pas valide");
         return ;
     }
 
     if (encrypted.length() <= 0) {
-        emit warning("Please enter the cipher text");
+        emit warning("Veuillez saisir le texte chiffré");
         return ;
     }
 
