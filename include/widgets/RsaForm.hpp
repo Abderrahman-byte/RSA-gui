@@ -1,5 +1,5 @@
-#include <qt5/QtWidgets/QWidget>
-#include <qt5/QtWidgets/QLineEdit>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QLineEdit>
 
 #include "widgets/InputField.hpp"
 #include "widgets/TextField.hpp"

@@ -1,5 +1,5 @@
-#include <qt5/QtWidgets/QWidget>
-#include <qt5/QtWidgets/QLabel>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QLabel>
 
 #ifndef _WARNDISPLAY_H_
 #define _WARNDISPLAY_H_ 1

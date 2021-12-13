@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include <qt5/QtWidgets/QVBoxLayout>
-#include <qt5/QtWidgets/QLabel>
-#include <qt5/QtWidgets/QLineEdit>
-#include <qt5/QtGui/QFont>
-#include <qt5/QtGui/QIntValidator>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtGui/QFont>
+#include <QtGui/QIntValidator>
 
 #include "widgets/InputField.hpp"
 

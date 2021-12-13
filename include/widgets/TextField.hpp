@@ -1,7 +1,7 @@
 #include <string>
 
-#include <qt5/QtWidgets/QWidget>
-#include <qt5/QtWidgets/QTextEdit>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QTextEdit>
 
 #ifndef _TEXTFIELD_H_
 #define _TEXTFIELD_H_ 1

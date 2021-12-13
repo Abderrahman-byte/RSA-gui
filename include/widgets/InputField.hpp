@@ -1,8 +1,8 @@
 #include <string>
 
-#include <qt5/QtWidgets/QWidget>
-#include <qt5/QtWidgets/QLineEdit>
-#include <qt5/QtGui/QValidator>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QLineEdit>
+#include <QtGui/QValidator>
 
 #ifndef _INPUTFIELD_H_
 #define _INPUTFIELD_H_ 1

@@ -1,6 +1,6 @@
-#include <qt5/QtWidgets/QVBoxLayout>
-#include <qt5/QtWidgets/QTextEdit>
-#include <qt5/QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QLabel>
 
 #include "widgets/TextField.hpp"
 

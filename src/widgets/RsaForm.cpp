@@ -1,13 +1,14 @@
 #include <iostream>
 #include <vector>
-#include <qt5/QtWidgets/QLineEdit>
-#include <qt5/QtWidgets/QVBoxLayout>
-#include <qt5/QtWidgets/QHBoxLayout>
-#include <qt5/QtWidgets/QBoxLayout>
-#include <qt5/QtWidgets/QGridLayout>
-#include <qt5/QtWidgets/QLabel>
-#include <qt5/QtGui/QFont>
-#include <qt5/QtGui/QValidator>
+
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QBoxLayout>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLabel>
+#include <QtGui/QFont>
+#include <QtGui/QValidator>
 
 #include "widgets/RsaForm.hpp"
 #include "widgets/InputField.hpp"

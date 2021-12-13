@@ -1,6 +1,7 @@
+#include <QtGui/QFont>
+#include <QtGui/QPalette>
+
 #include "widgets/Button.hpp"
-#include <qt5/QtGui/QFont>
-#include <qt5/QtGui/QPalette>
 
 Button::Button (QWidget *parent) : Button("", parent)  {}
 

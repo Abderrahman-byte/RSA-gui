@@ -1,6 +1,6 @@
-#include <qt5/QtCore/QCoreApplication>
-#include <qt5/QtWidgets/QVBoxLayout>
-#include <qt5/QtWidgets/QGridLayout>
+#include <QtCore/QCoreApplication>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QGridLayout>
 
 #include "MainWindow.hpp"
 #include "widgets/RsaForm.hpp"

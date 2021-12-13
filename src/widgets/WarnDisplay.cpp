@@ -1,5 +1,5 @@
-#include <qt5/QtWidgets/QLabel>
-#include <qt5/QtWidgets/QVBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 
 #include "widgets/WarnDisplay.hpp"
 
