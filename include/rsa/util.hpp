@@ -1,7 +1,7 @@
 #ifndef _RSAUTILS_H_ 
 #define _RSAUTILS_H_ 1
 
-#define MAX_PRIMES_INTERVAL 200
+#define MAX_PRIMES_INTERVAL 100
 #define MAX_PRIVATE_KEY 400
 
 extern long generatePrime ();
